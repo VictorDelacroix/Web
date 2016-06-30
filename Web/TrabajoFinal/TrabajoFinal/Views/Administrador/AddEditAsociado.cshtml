@@ -1,0 +1,74 @@
+﻿@model TrabajoFinal.ViewModel.AddEditAsociadoVM
+@{
+    ViewBag.Title = "AddEditAsociado";
+    Layout = "~/Views/Shared/_LayoutAdministrador.cshtml";
+}
+
+<h2>HOLI</h2>
+<form class="form-horizontal form-label-left" novalidate method="post" enctype="multipart/form-data" action="@Url.Action("AddEditAsociado")">
+    @Html.HiddenFor(x => x.IDAsociado)
+    <span class="section">Información Personal</span>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">
+            Nombre: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Nombre, new { @type = "text", @id = "nombre", @name = "nombre", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">
+            Apellido: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Apellido, new { @type = "text", @id = "apellido", @name = "apellido", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dni">
+            DNI: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.DNI, new { @type = "text", @id = "dni", @name = "dni", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">
+            direccion: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Direccion, new { @type = "text", @id = "direccion", @name = "direccion", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">
+            telefono: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Telefono, new { @type = "text", @id = "telefono", @name = "telefono", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <span class="section">Cuenta Gym UPC</span>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario">
+            Usuario: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Usuario, new { @type = "text", @id = "usuario", @name = "usuario", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">
+            Contraseña: <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.TextBoxFor(x => x.objAsociado.Pass, new { @type = "password", @id = "pass", @name = "pass", @required = "required", @class = "form-control col-md-7 col-xs-12" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-3">
+            <button id="enviar" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Procesar</button>
+            <a class="btn btn-primary" href="@Url.Action("Asociados")"><i class="fa fa-close"></i> Cancelar</a>
+        </div>
+    </div>
+</form>

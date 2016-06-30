@@ -1,0 +1,35 @@
+﻿@model TrabajoFinal.ViewModel.EstablecimientosVM
+@{
+    ViewBag.Title = "Establecimientos";
+    Layout = "~/Views/Shared/_LayoutAsociado.cshtml";
+}
+
+<h2>Establecimientos</h2>
+
+<div class="nav">
+
+</div>
+<div id="container">
+    <table class="table-bordered table-responsive table-hovered" align="center" height="250">
+        <thead>
+            <tr>
+                <th> ID  </th>
+                <th> Nombre </th>
+                <th> Descripcion </th>
+                <th> Detalles </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LstEstablecimiento)
+            {
+                <tr>
+                    <td> @item.IDEstablecimiento </td>
+                    <td> @item.Nombre </td>
+                    <td> @item.Descripcion</td>
+                    <td> <a class="btn btn-default" href="@Url.Action("EstablecimientoDetalle","Asociado", new { ID = item.IDEstablecimiento})"> Detalles </a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div></div>
+</div>

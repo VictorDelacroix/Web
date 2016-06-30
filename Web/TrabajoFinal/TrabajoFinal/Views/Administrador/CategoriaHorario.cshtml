@@ -1,0 +1,35 @@
+﻿@model TrabajoFinal.ViewModel.CategoriaHorarioVM
+@{
+    ViewBag.Title = "CategoriaHorario";
+    Layout = "~/Views/Shared/_LayoutAdministrador.cshtml";
+}
+
+<h2>Categoria Horario</h2>
+
+<div class="nav">
+
+</div>
+<div id="container">
+    <table class="table-bordered table-responsive table-hovered" align="center" height="250">
+        <thead>
+            <tr>
+                <th> ID  </th>
+                <th> HoraInicio </th>
+                <!--<th> Establecimientos </th> -->
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstCategoriaH)
+            {
+                <tr>
+                    <td> @item.IDCategoriaHorario </td>
+                    <td> @item.HoraInicio </td>
+                    <!--<td> @item.Establecimiento</td> -->
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div></div>
+</div>

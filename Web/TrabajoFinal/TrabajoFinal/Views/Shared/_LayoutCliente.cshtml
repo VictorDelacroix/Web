@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+Template Name: Modular Business
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Modular Business</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="~/Content/layout/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="~/Content/layout/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/layout/scripts/jquery.jcarousel.pack.js"></script>
+    <script type="text/javascript" src="~/Content/layout/scripts/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="~/Content/layout/scripts/jquery.jcarousel.setup.js"></script>
+</head>
+<body id="top">
+    <div class="wrapper col1">
+        <div id="topbar">
+            <p>Tel: +99 99999999 | Mail: upcgym@correo.com</p>
+            <ul >
+                <li> Cliente </li>
+                <li> @Session["Nombre"]  </li>
+                <li><a href="@Url.Action("Index","Home")"> Cerrar Sesión </a></li>
+              
+            </ul>
+            <br class="clear" />
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col2">
+        <div id="header">
+            <div class="fl_left">
+                <img class="imgl" src="~/Images/UPC2.png" alt="" width="125" height="125" /><h1><a href="index.html">UPC GYM</a></h1>
+                <p> </p>
+            </div>
+            <div class="fl_right"> <a href="#"><img src="~/Images/Ian Gym.png" width="450" height="150" alt="" /></a> </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col3">
+        <div id="topnav">
+            <ul>
+                <li class="active"><a href="@Url.Action("Index","Cliente")"> Principal </a><span> Página Principal</span></li>
+                <li><a href="@Url.Action("Establecimientos","Cliente")"> Establecimientos </a><span> Nuestros Locales!</span></li>
+                <li><a href="@Url.Action("Planes","Cliente")"> Planes </a></li>
+                <li><a href="@Url.Action("Categorias","Cliente")"> Categorias</a></li>
+                <li><a href="@Url.Action("MisPlanes","Cliente")"> Mis Planes </a></li>
+               
+            </ul>
+            <br class="clear" />
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+   
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col5">
+       
+            @RenderBody();
+        
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col6">
+        <div id="footer">
+            <div id="newsletter">
+                <h2>Stay In The Know !</h2>
+                <p>Please enter your email to join our mailing list</p>
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>News Letter</legend>
+                        <input type="text" value="Enter Email Here&hellip;" onfocus="this.value=(this.value=='Enter Email Here&hellip;')? '' : this.value ;" />
+                        <input type="submit" name="news_go" id="news_go" value="GO" />
+                    </fieldset>
+                </form>
+                <p>To unsubscribe please <a href="#">click here &raquo;</a></p>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col7">
+        <div id="copyright">
+            <p class="fl_left">Copyright &copy; 2014 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+            <br class="clear" />
+        </div>
+    </div>
+</body>
+</html>

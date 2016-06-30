@@ -1,0 +1,611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GymUPCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="IDAdministrador" />
+          </Key>
+          <Property Name="IDAdministrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="20" />
+          <Property Name="Pass" Type="varchar" MaxLength="20" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Apellido" Type="varchar" MaxLength="30" />
+          <Property Name="DNI" Type="varchar" MaxLength="8" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Asociado">
+          <Key>
+            <PropertyRef Name="IDAsociado" />
+          </Key>
+          <Property Name="IDAsociado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="20" />
+          <Property Name="Pass" Type="varchar" MaxLength="20" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Apellido" Type="varchar" MaxLength="30" />
+          <Property Name="DNI" Type="varchar" MaxLength="8" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="25" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="CategoriaHorario">
+          <Key>
+            <PropertyRef Name="IDCategoriaHorario" />
+          </Key>
+          <Property Name="IDCategoriaHorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="Dia" Type="varchar" MaxLength="10" />
+          <Property Name="HoraInicio" Type="varchar" MaxLength="10" />
+          <Property Name="IDEstablecimiento" Type="int" />
+        </EntityType>
+        <EntityType Name="CategoriaPlan">
+          <Key>
+            <PropertyRef Name="IDCategoriaPlan" />
+          </Key>
+          <Property Name="IDCategoriaPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="IDPlan" Type="int" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDRS" Type="varchar(max)" />
+          <Property Name="Usuario" Type="varchar" MaxLength="20" />
+          <Property Name="Pass" Type="varchar" MaxLength="20" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Apellido" Type="varchar" MaxLength="30" />
+          <Property Name="DNI" Type="varchar" MaxLength="8" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ClientePlan">
+          <Key>
+            <PropertyRef Name="IDClientePlan" />
+          </Key>
+          <Property Name="IDClientePlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="IDPlan" Type="int" />
+          <Property Name="Mes" Type="varchar" MaxLength="10" />
+          <Property Name="Dia" Type="varchar" MaxLength="10" />
+          <Property Name="Año" Type="int" />
+          <Property Name="Autorizado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="IDEstablecimiento" />
+          </Key>
+          <Property Name="IDEstablecimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Latitud" Type="varchar" MaxLength="30" />
+          <Property Name="Longitud" Type="varchar" MaxLength="30" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="IDPlan" />
+          </Key>
+          <Property Name="IDPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDEstablecimiento" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="Oferta" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_CategoriaHorario_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="CategoriaHorario" Type="Self.CategoriaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="CategoriaHorario">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaHorario_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="0..1" />
+          <End Role="CategoriaHorario" Type="Self.CategoriaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Principal>
+            <Dependent Role="CategoriaHorario">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaPlan_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="CategoriaPlan" Type="Self.CategoriaPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="CategoriaPlan">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaPlan_Plan">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="CategoriaPlan" Type="Self.CategoriaPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IDPlan" />
+            </Principal>
+            <Dependent Role="CategoriaPlan">
+              <PropertyRef Name="IDPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientePlan_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ClientePlan" Type="Self.ClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="ClientePlan">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientePlan_Plan">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="ClientePlan" Type="Self.ClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IDPlan" />
+            </Principal>
+            <Dependent Role="ClientePlan">
+              <PropertyRef Name="IDPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planes_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="0..1" />
+          <End Role="Planes" Type="Self.Planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Principal>
+            <Dependent Role="Planes">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymUPCModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asociado" EntityType="Self.Asociado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriaHorario" EntityType="Self.CategoriaHorario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriaPlan" EntityType="Self.CategoriaPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientePlan" EntityType="Self.ClientePlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoriaHorario_Categoria" Association="Self.FK_CategoriaHorario_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaHorario" EntitySet="CategoriaHorario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaHorario_Establecimiento" Association="Self.FK_CategoriaHorario_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="CategoriaHorario" EntitySet="CategoriaHorario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaPlan_Categoria" Association="Self.FK_CategoriaPlan_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaPlan" EntitySet="CategoriaPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaPlan_Plan" Association="Self.FK_CategoriaPlan_Plan">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="CategoriaPlan" EntitySet="CategoriaPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientePlan_Cliente" Association="Self.FK_ClientePlan_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClientePlan" EntitySet="ClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientePlan_Plan" Association="Self.FK_ClientePlan_Plan">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="ClientePlan" EntitySet="ClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planes_Establecimiento" Association="Self.FK_Planes_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Planes" EntitySet="Planes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymUPCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="IDAdministrador" />
+          </Key>
+          <Property Name="IDAdministrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Asociado">
+          <Key>
+            <PropertyRef Name="IDAsociado" />
+          </Key>
+          <Property Name="IDAsociado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoriaHorario" Relationship="Self.FK_CategoriaHorario_Categoria" FromRole="Categoria" ToRole="CategoriaHorario" />
+          <NavigationProperty Name="CategoriaPlan" Relationship="Self.FK_CategoriaPlan_Categoria" FromRole="Categoria" ToRole="CategoriaPlan" />
+        </EntityType>
+        <EntityType Name="CategoriaHorario">
+          <Key>
+            <PropertyRef Name="IDCategoriaHorario" />
+          </Key>
+          <Property Name="IDCategoriaHorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="Dia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HoraInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDEstablecimiento" Type="Int32" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_CategoriaHorario_Categoria" FromRole="CategoriaHorario" ToRole="Categoria" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_CategoriaHorario_Establecimiento" FromRole="CategoriaHorario" ToRole="Establecimiento" />
+        </EntityType>
+        <EntityType Name="CategoriaPlan">
+          <Key>
+            <PropertyRef Name="IDCategoriaPlan" />
+          </Key>
+          <Property Name="IDCategoriaPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="IDPlan" Type="Int32" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_CategoriaPlan_Categoria" FromRole="CategoriaPlan" ToRole="Categoria" />
+          <NavigationProperty Name="Planes" Relationship="Self.FK_CategoriaPlan_Plan" FromRole="CategoriaPlan" ToRole="Planes" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDRS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ClientePlan" Relationship="Self.FK_ClientePlan_Cliente" FromRole="Cliente" ToRole="ClientePlan" />
+        </EntityType>
+        <EntityType Name="ClientePlan">
+          <Key>
+            <PropertyRef Name="IDClientePlan" />
+          </Key>
+          <Property Name="IDClientePlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="IDPlan" Type="Int32" />
+          <Property Name="Mes" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Dia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Año" Type="Int32" />
+          <Property Name="Autorizado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClientePlan_Cliente" FromRole="ClientePlan" ToRole="Cliente" />
+          <NavigationProperty Name="Planes" Relationship="Self.FK_ClientePlan_Plan" FromRole="ClientePlan" ToRole="Planes" />
+        </EntityType>
+        <EntityType Name="Establecimiento">
+          <Key>
+            <PropertyRef Name="IDEstablecimiento" />
+          </Key>
+          <Property Name="IDEstablecimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitud" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Longitud" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoriaHorario" Relationship="Self.FK_CategoriaHorario_Establecimiento" FromRole="Establecimiento" ToRole="CategoriaHorario" />
+          <NavigationProperty Name="Planes" Relationship="Self.FK_Planes_Establecimiento" FromRole="Establecimiento" ToRole="Planes" />
+        </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="IDPlan" />
+          </Key>
+          <Property Name="IDPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEstablecimiento" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="Oferta" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CategoriaPlan" Relationship="Self.FK_CategoriaPlan_Plan" FromRole="Planes" ToRole="CategoriaPlan" />
+          <NavigationProperty Name="ClientePlan" Relationship="Self.FK_ClientePlan_Plan" FromRole="Planes" ToRole="ClientePlan" />
+          <NavigationProperty Name="Establecimiento" Relationship="Self.FK_Planes_Establecimiento" FromRole="Planes" ToRole="Establecimiento" />
+        </EntityType>
+        <Association Name="FK_CategoriaHorario_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="CategoriaHorario" Type="Self.CategoriaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="CategoriaHorario">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaPlan_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="CategoriaPlan" Type="Self.CategoriaPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="CategoriaPlan">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaHorario_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="0..1" />
+          <End Role="CategoriaHorario" Type="Self.CategoriaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Principal>
+            <Dependent Role="CategoriaHorario">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaPlan_Plan">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="CategoriaPlan" Type="Self.CategoriaPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IDPlan" />
+            </Principal>
+            <Dependent Role="CategoriaPlan">
+              <PropertyRef Name="IDPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientePlan_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ClientePlan" Type="Self.ClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="ClientePlan">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientePlan_Plan">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="ClientePlan" Type="Self.ClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IDPlan" />
+            </Principal>
+            <Dependent Role="ClientePlan">
+              <PropertyRef Name="IDPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planes_Establecimiento">
+          <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="0..1" />
+          <End Role="Planes" Type="Self.Planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establecimiento">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Principal>
+            <Dependent Role="Planes">
+              <PropertyRef Name="IDEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymUPCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" />
+          <EntitySet Name="Asociado" EntityType="Self.Asociado" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="CategoriaHorario" EntityType="Self.CategoriaHorario" />
+          <EntitySet Name="CategoriaPlan" EntityType="Self.CategoriaPlan" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="ClientePlan" EntityType="Self.ClientePlan" />
+          <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" />
+          <AssociationSet Name="FK_CategoriaHorario_Categoria" Association="Self.FK_CategoriaHorario_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaHorario" EntitySet="CategoriaHorario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaPlan_Categoria" Association="Self.FK_CategoriaPlan_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="CategoriaPlan" EntitySet="CategoriaPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaHorario_Establecimiento" Association="Self.FK_CategoriaHorario_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="CategoriaHorario" EntitySet="CategoriaHorario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaPlan_Plan" Association="Self.FK_CategoriaPlan_Plan">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="CategoriaPlan" EntitySet="CategoriaPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientePlan_Cliente" Association="Self.FK_ClientePlan_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClientePlan" EntitySet="ClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientePlan_Plan" Association="Self.FK_ClientePlan_Plan">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="ClientePlan" EntitySet="ClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planes_Establecimiento" Association="Self.FK_Planes_Establecimiento">
+            <End Role="Establecimiento" EntitySet="Establecimiento" />
+            <End Role="Planes" EntitySet="Planes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GymUPCModelStoreContainer" CdmEntityContainer="GymUPCEntities">
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="GymUPCModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="IDAdministrador" ColumnName="IDAdministrador" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asociado">
+            <EntityTypeMapping TypeName="GymUPCModel.Asociado">
+              <MappingFragment StoreEntitySet="Asociado">
+                <ScalarProperty Name="IDAsociado" ColumnName="IDAsociado" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="GymUPCModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaHorario">
+            <EntityTypeMapping TypeName="GymUPCModel.CategoriaHorario">
+              <MappingFragment StoreEntitySet="CategoriaHorario">
+                <ScalarProperty Name="IDCategoriaHorario" ColumnName="IDCategoriaHorario" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="IDEstablecimiento" ColumnName="IDEstablecimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaPlan">
+            <EntityTypeMapping TypeName="GymUPCModel.CategoriaPlan">
+              <MappingFragment StoreEntitySet="CategoriaPlan">
+                <ScalarProperty Name="IDCategoriaPlan" ColumnName="IDCategoriaPlan" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="GymUPCModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDRS" ColumnName="IDRS" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientePlan">
+            <EntityTypeMapping TypeName="GymUPCModel.ClientePlan">
+              <MappingFragment StoreEntitySet="ClientePlan">
+                <ScalarProperty Name="IDClientePlan" ColumnName="IDClientePlan" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Autorizado" ColumnName="Autorizado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Establecimiento">
+            <EntityTypeMapping TypeName="GymUPCModel.Establecimiento">
+              <MappingFragment StoreEntitySet="Establecimiento">
+                <ScalarProperty Name="IDEstablecimiento" ColumnName="IDEstablecimiento" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planes">
+            <EntityTypeMapping TypeName="GymUPCModel.Planes">
+              <MappingFragment StoreEntitySet="Planes">
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="IDEstablecimiento" ColumnName="IDEstablecimiento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Oferta" ColumnName="Oferta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

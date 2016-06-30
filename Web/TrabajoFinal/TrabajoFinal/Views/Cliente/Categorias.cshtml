@@ -1,0 +1,39 @@
+﻿@model TrabajoFinal.ViewModel.CategoriaVM
+@{
+    ViewBag.Title = "Categorias";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<h2>Categorias</h2>
+
+<div class="nav">
+
+</div>
+<div id="container">
+    <table class="table-bordered table-responsive table-hovered" align="center" height="250">
+        <thead>
+            <tr>
+                <th> ID  </th>
+                <th> Nombre </th>
+                <th> Descripcion </th>
+                <th> Detalles </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstCategoria)
+            {
+                <tr>
+                    <td> @item.IDCategoria </td>
+                    <td> @item.Nombre </td>
+                    <td> @item.Descripcion</td>
+                    <td>
+                        <a class="btn btn-default"
+                           href="@Url.Action("CategoriaHorario","Cliente", new { ID = item.IDCategoria})">Detalles</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div></div>
+</div>
+

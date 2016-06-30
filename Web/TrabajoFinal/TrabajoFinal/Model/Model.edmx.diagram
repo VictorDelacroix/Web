@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e09dfff24c614bbea1e77fcb07c283a1" Name="Diagram1">
+        <EntityTypeShape EntityType="GymUPCModel.Administrador" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.Asociado" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.Categoria" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.CategoriaHorario" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.CategoriaPlan" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.Cliente" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.ClientePlan" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.Establecimiento" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymUPCModel.Planes" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="GymUPCModel.FK_CategoriaHorario_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_CategoriaPlan_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_CategoriaHorario_Establecimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_CategoriaPlan_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_ClientePlan_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_ClientePlan_Plan" ManuallyRouted="false" />
+        <AssociationConnector Association="GymUPCModel.FK_Planes_Establecimiento" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

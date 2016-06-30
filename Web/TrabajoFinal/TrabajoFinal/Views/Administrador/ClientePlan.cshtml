@@ -1,0 +1,36 @@
+﻿@model TrabajoFinal.ViewModel.ClientePlanesVM
+@{
+    ViewBag.Title = "ClientePlan";
+    Layout = "~/Views/Shared/_LayoutAdministrador.cshtml";
+}
+
+<h2>ClientePlan</h2>
+
+
+<div class="nav">
+
+</div>
+<div id="container">
+    <table class="table-bordered table-responsive table-hovered" align="center" height="250">
+        <thead>
+            <tr>
+                <th> ID Cliente </th>
+                <th> ID Plan </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.lstClientePlanes)
+            {
+                <tr>
+                    <td> @item.IDCliente </td>
+                    <td> @item.IDPlan </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div></div>
+</div>

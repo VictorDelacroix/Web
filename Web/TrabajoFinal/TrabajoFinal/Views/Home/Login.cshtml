@@ -1,0 +1,118 @@
+﻿@model TrabajoFinal.ViewModel.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/Content/scriptRS/fbapi.js"></script>
+    <title>@ViewBag.Title</title>
+
+    <style>
+        #imgLogo {
+            width: 100px;
+        }
+
+        .pace.pace-active {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <center>
+        <!-- Page container -->
+        <div class="page-container login-container">
+
+            <!-- Page content -->
+            <div class="page-content">
+
+                <!-- Main content -->
+                <div class="content-wrapper">
+
+                    <!-- Simple login form -->
+                    @using (Html.BeginForm())
+                    {
+
+                        <div class="panel panel-body login-form">
+                            <div class="text-center">
+                                <div class="icon-object border-slate-300 text-slate-300"><img src=@Url.Content("~/Images/UPC.png") id="imgLogo" /></div>
+                                <h5 class="content-group">Inicio de sesión<small class="display-block"><br />Ingresa tus credenciales</small></h5>
+                            </div>
+
+                            @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                            {
+                                @Html.ValidationSummary("", new { @class = "alert alert-danger" })
+                            }
+
+
+                            <div class="form-group has-feedback has-feedback-left">
+                                @Html.TextBoxFor(x => x.UsuarioCodigo, new { @class = "form-control", placeholder = "Usuario" })
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group has-feedback has-feedback-left">
+                                @Html.PasswordFor(x => x.UsuarioPassword, new { @class = "form-control", placeholder = "Contraseña" })
+                                <div class="form-control-feedback">
+                                    <i class="icon-lock2 text-muted"></i>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Ingresar<i class="icon-circle-right2 position-right"></i></button>
+                            </div>
+
+                           
+                        </div>
+                    }
+                    <!-- /simple login form -->
+
+                </div>
+                <!-- /main content -->
+                <div class="social-login">
+                    <h3>...o inicia sesión con:</h3>
+                    <div class="social-login-buttons">
+                        <a class="btn btn-link-1 btn-link-1-facebook" onclick="loginfb();" href="#">
+                            <i class="fa fa-facebook"></i> Facebook
+                        </a>
+                        @*<div class="g-signin2" data-onsuccess="onSignIn"></div>*@
+                    </div>
+                    <br /><br />
+                    @*NO BORRAR LO PENSAREMOS DESPUES<a onclick="compartirfb();">Compartir</a>*@
+                </div>
+
+                <form id="mform" name="mform" role="form" method="post" action="@Url.Action("LoginRS", "Home")">
+                    @Html.HiddenFor(x => x.objCliente.IDRS, new { @name = "FBIDRS", @id = "FBIDRS" })
+                    @Html.HiddenFor(x => x.objCliente.Nombre, new { @name = "FBnombre", @id = "FBnombre" })
+                    @Html.HiddenFor(x => x.objCliente.Apellido, new { @name = "FBapellido", @id = "FBapellido" })
+                    @Html.HiddenFor(x => x.Imagen, new { @name = "FBImgRS", @id = "FBImgRS" })
+                </form>
+            </div>
+            <!-- /page content -->
+            <!-- Footer -->
+            <br />
+            <div class="footer text-muted">
+                &copy; 2016. <a href="#">UPCNET</a> elaborado por <a href="http://themeforest.net/user/Kopyov" target="_blank">Duspace</a>
+            </div>
+            <!-- /footer -->
+
+        </div>
+        <!-- /page container -->
+    </center>
+
+
+</body>
+</html>
